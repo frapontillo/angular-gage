@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownAttribute -->
+<html ng-app="justgageDemoApp">
+<head>
+    <title>angular-justgage</title>
+    <meta name="description" content="AngularJS directive for justgage">
+    <script src="../bower_components/angular/angular.js" type="text/javascript"></script>
+    <script src="../bower_components/raphael/raphael.js" type="text/javascript"></script>
+    <script src="../bower_components/justgage-bower/justgage.js" type="text/javascript"></script>
+    <script src="../dist/angular-gage.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var app = angular.module('justgageDemoApp', ['frapontillo.gage']);
+        app.controller('MainCtrl', function ($scope) {
+            $scope.title = 'My gauge';
+            $scope.titleFontColor = 'blue';
+
+            $scope.value = 1234.358;
+            $scope.valueFontColor = 'red';
+
+            $scope.min = 0;
+            $scope.max = 1337;
+
+            $scope.valueMinFontSize = undefined;
+            $scope.titleMinFontSize = undefined;
+            $scope.labelMinFontSize = undefined;
+            $scope.minLabelMinFontSize = undefined;
+            $scope.maxLabelMinFontSize = undefined;
+
+            $scope.hideValue = false;
+            $scope.hideMinMax = false;
+            $scope.hideInnerShadow = false;
+
+            $scope.width = undefined;
+            $scope.height = undefined;
+            $scope.relativeGaugeSize = undefined;
+
+            $scope.gaugeWidthScale = 0.5;
+            $scope.gaugeColor = 'grey';
+
+            $scope.showInnerShadow = true;
+            $scope.shadowOpacity = 0.5;
+            $scope.shadowSize = 3;
+            $scope.shadowVerticalOffset = 10;
+
+            $scope.levelColors = ['#00FFF2', '#668C54', '#FFAF2E', '#FF2EF1'];
+            $scope.customSectors = [
+                {
+                    color: "#ff0000",
+                    lo: 0,
+                    hi: 750
+                },
+                {
+                    color: "#00ff00",
+                    lo: 750,
+                    hi: 1000
+                },
+                {
+                    color: "#0000ff",
+                    lo: 1000,
+                    hi: 1337
+                }
+            ];
+            $scope.noGradient = false;
+
+            $scope.label = 'Green label';
+            $scope.labelFontColor = 'green';
+
+            $scope.startAnimationTime = 0;
+            $scope.startAnimationType = undefined;
+            $scope.refreshAnimationTime = undefined;
+            $scope.refreshAnimationType = undefined;
+
+            $scope.donut = undefined;
+            $scope.donutAngle = 90;
+
+            $scope.counter = true;
+            $scope.decimals = 2;
+            $scope.symbol = 'X';
+            $scope.formatNumber = true;
+            $scope.humanFriendly = true;
+            $scope.humanFriendlyDecimal = true;
+
+            $scope.textRenderer = function (value) {
+                return value;
+            };
+        });
+    </script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+        .wrapper {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+The following gauge is 50% wide in order to test responsiveness.
+<div class="wrapper" ng-controller="MainCtrl">
+    <div justgage
+         title="{{title}}" title-font-color="{{titleFontColor}}"
+         value="{{value}}" value-font-color="{{valueFontColor}}"
+         width="{{width}}" height="{{height}}" relative-gauge-size="{{relativeGaugeSize}}"
+         value-min-font-size="{{valueMinFontSize}}" title-min-font-size="{{titleMinFontSize}}"
+         label-min-font-size="{{labelMinFontSize}}" min-label-min-font-size="{{minLabelMinFontSize}}"
+         maxLabelMinFontSize="{{maxLabelMinFontSize}}"
+         min="{{min}}" max="{{max}}"
+         hide-min-max="{{hideMinMax}}" hide-value="{{hideValue}}" hide-inner-shadow="{{hideInnerShadow}}"
+         gauge-width-scale="{{gaugeWidthScale}}" gauge-color="{{gaugeColor}}"
+         show-inner-shadow="{{showInnerShadow}}" shadow-opacity="{{shadowOpacity}}"
+         shadow-size="{{shadowSize}}" shadow-vertical-offset="{{shadowVerticalOffset}}"
+         level-colors="{{levelColors}}" custom-sectors="{{customSectors}}" no-gradient="{{noGradient}}"
+         label="{{label}}" label-font-color="{{labelFontColor}}"
+         start-animation-time="{{startAnimationTime}}" start-animation-type="{{startAnimationType}}"
+         refresh-animation-time="{{refreshAnimationTime}}" refresh-animation-type="{{refreshAnimationType}}"
+         donut="{{donut}}" donut-start-angle="{{donutStartAngle}}"
+         counter="{{counter}}" decimals="{{decimals}}" symbol="{{symbol}}" format-number="{{formatNumber}}"
+         human-friendly="{{humanFriendly}}" human-friendly-decimal="{{humanFriendlyDecimal}}"
+         text-renderer="textRenderer()"></div>
+</div>
+</body>
+</html>
