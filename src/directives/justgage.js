@@ -103,7 +103,11 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
             };
             angular.extend(justgageOptions, justgageCtrl.getDefinedOptions());
             justgage = new JustGage(justgageOptions);
-
+            if(justgage) {
+              // Remove existing canvas from DOM
+              var canvasDom = justgage.canvas.canvas;
+              canvasDom.parentNode.removeChild(canvasDom);
+            }
             // Bind scope changes to element methods
             bindValue();
             bindOtherOptions();
