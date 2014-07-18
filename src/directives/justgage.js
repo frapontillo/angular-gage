@@ -73,7 +73,12 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
           var bindValue = function() {
             watchers.push(scope.$watch('value', function(newValue, oldValue) {
               if (newValue !== oldValue) {
-                justgage.refresh(newValue);
+                justgage.refresh(newValue, scope.max);
+              }
+            }));
+            watchers.push(scope.$watch('max', function(newValue, oldValue) {
+              if (newValue !== oldValue) {
+                justgage.refresh(scope.value, newValue);
               }
             }));
           };
@@ -83,7 +88,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
            * one of them changes.
            */
           var bindOtherOptions = function() {
-            var otherOptionsNames = justgageCtrl.getOptionsNames('value');
+            var otherOptionsNames = justgageCtrl.getOptionsNames(['value', 'max']);
             // TODO: move to angularjs 1.3 and replace with $watchGroup
             angular.forEach(otherOptionsNames, function (name) {
               watchers.push(scope.$watch(name, function(newValue, oldValue) {
