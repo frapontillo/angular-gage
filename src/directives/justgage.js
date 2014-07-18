@@ -64,17 +64,18 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
         },
         controller: 'justgageCtrl',
         link: function (scope, element, attrs, justgageCtrl) {
-          var justgage;
+          var justgage,
+              watchers = [];
 
           /**
            * Bind the `value` property on the scope in order to refresh the JustGage when it changes.
            */
           var bindValue = function() {
-            scope.$watch('value', function(newValue, oldValue) {
+            watchers.push(scope.$watch('value', function(newValue, oldValue) {
               if (newValue !== oldValue) {
                 justgage.refresh(newValue);
               }
-            });
+            }));
           };
 
           /**
@@ -85,11 +86,11 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
             var otherOptionsNames = justgageCtrl.getOptionsNames('value');
             // TODO: move to angularjs 1.3 and replace with $watchGroup
             angular.forEach(otherOptionsNames, function (name) {
-              scope.$watch(name, function(newValue, oldValue) {
+              watchers.push(scope.$watch(name, function(newValue, oldValue) {
                 if (newValue !== oldValue) {
                   init();
                 }
-              });
+              }));
             });
           };
 
@@ -107,6 +108,11 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
               // Remove existing canvas from DOM
               var canvasDom = justgage.canvas.canvas;
               canvasDom.parentNode.removeChild(canvasDom);
+            }
+            while(watchers.length > 0) {
+              // Clear existing watcher (see http://stackoverflow.com/a/17306971 why while & pop)
+              var watcher = watchers.pop();
+              watcher();
             }
             // Bind scope changes to element methods
             bindValue();
