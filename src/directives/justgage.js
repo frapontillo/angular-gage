@@ -108,17 +108,22 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
               parentNode: element[0]
             };
             angular.extend(justgageOptions, justgageCtrl.getDefinedOptions());
-            justgage = new JustGage(justgageOptions);
-            if(justgage) {
-              // Remove existing canvas from DOM
+
+            // Remove existing canvas from DOM (if any)
+            if (justgage) {
               var canvasDom = justgage.canvas.canvas;
               canvasDom.parentNode.removeChild(canvasDom);
             }
-            while(watchers.length > 0) {
-              // Clear existing watcher (see http://stackoverflow.com/a/17306971 why while & pop)
+
+            // Clear existing watcher (see http://stackoverflow.com/a/17306971 why while & pop)
+            while (watchers.length > 0) {
               var watcher = watchers.pop();
               watcher();
             }
+
+            // rebuild the gage
+            justgage = new JustGage(justgageOptions);
+
             // Bind scope changes to element methods
             bindValue();
             bindOtherOptions();
