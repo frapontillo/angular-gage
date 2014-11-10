@@ -18,14 +18,24 @@
     "karma-e2e.conf.js",
     "package.json"
   ],
-  "authors": [{
-    "name" : "Francesco Pontillo",
-    "email" : "francescopontillo@gmail.com",
-    "homepage" : "https://github.com/frapontillo"
-  }],
-  "license" : ["Apache-2.0"],
+  "authors": [
+    {
+      "name": "Francesco Pontillo",
+      "email": "francescopontillo@gmail.com",
+      "homepage": "https://github.com/frapontillo"
+    }
+  ],
+  "license": [
+    "Apache-2.0"
+  ],
   "homepage": "https://github.com/frapontillo/angular-gage",
-  "keywords": ["justgage", "gauge", "indicator", "angular", "angularjs"],
+  "keywords": [
+    "justgage",
+    "gauge",
+    "indicator",
+    "angular",
+    "angularjs"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/frapontillo/angular-gage.git"
@@ -40,5 +50,8 @@
   "devDependencies": {
     "angular-mocks": "1.3.2",
     "angular-scenario": "1.3.2"
+  },
+  "resolutions": {
+    "raphael": "5f08cf50e5d6a852f8bc40310b2cdc85bafd5b87"
   }
 }
