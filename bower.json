@@ -1,6 +1,6 @@
 {
   "name": "angular-gage",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AngularJS directive for the JustGage (http://justgage.com/) gauge.",
   "main": "./dist/angular-gage.js",
   "ignore": [
@@ -18,26 +18,40 @@
     "karma-e2e.conf.js",
     "package.json"
   ],
-  "authors": [{
-    "name" : "Francesco Pontillo",
-    "email" : "francescopontillo@gmail.com",
-    "homepage" : "https://github.com/frapontillo"
-  }],
-  "license" : ["Apache-2.0"],
+  "authors": [
+    {
+      "name": "Francesco Pontillo",
+      "email": "francescopontillo@gmail.com",
+      "homepage": "https://github.com/frapontillo"
+    }
+  ],
+  "license": [
+    "Apache-2.0"
+  ],
   "homepage": "https://github.com/frapontillo/angular-gage",
-  "keywords": ["justgage", "gauge", "indicator", "angular", "angularjs"],
+  "keywords": [
+    "justgage",
+    "gauge",
+    "indicator",
+    "angular",
+    "angularjs"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/frapontillo/angular-gage.git"
   },
   "dependencies": {
-    "angular": "1.2.15",
+    "angular": "1.3.3",
     "json3": "~3.2.6",
     "es5-shim": "~2.1.0",
+    "raphael": "#5f08cf50e5d6a852f8bc40310b2cdc85bafd5b87",
     "justgage-bower": "toorshia/justgage"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.15",
-    "angular-scenario": "1.2.15"
+    "angular-mocks": "1.3.3",
+    "angular-scenario": "1.3.3"
+  },
+  "resolutions": {
+    "raphael": "5f08cf50e5d6a852f8bc40310b2cdc85bafd5b87"
   }
 }
