@@ -17,7 +17,7 @@ describe('Directive: justgage', function () {
     'refresh-animation-type="{{refreshAnimationType}}" donut="{{donut}}" donut-start-angle="{{donutStartAngle}}" ' +
     'counter="{{counter}}" decimals="{{decimals}}" symbol="{{symbol}}" format-number="{{formatNumber}}" ' +
     'human-friendly="{{humanFriendly}}" human-friendly-decimal="{{humanFriendlyDecimal}}" ' +
-    'text-renderer="textRenderer()"></div>';
+    'text-renderer="textRenderer"></div>';
 
   var element;
 
