@@ -1,6 +1,6 @@
 /**
  * angular-gage
- * @version v0.0.2 - 2014-11-20
+ * @version v0.1.0 - 2015-06-13
  * @author Francesco Pontillo (francescopontillo@gmail.com)
  * @link https://github.com/frapontillo/angular-gage
  * @license Apache-2.0
@@ -26,9 +26,13 @@ angular.module('frapontillo.gage.controllers', []).controller('justgageCtrl', [
       customSectors: angular.fromJson,
       levelColors: angular.fromJson,
       textRenderer: function (originalFunction) {
-        if (originalFunction && originalFunction($scope.value)) {
-          return originalFunction;
+        if (!originalFunction) {
+          return undefined;
         }
+        if (angular.isFunction(originalFunction)) {
+          return originalFunction();
+        }
+        return originalFunction;
       }
     };
     /**

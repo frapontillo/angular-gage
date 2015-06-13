@@ -12,9 +12,13 @@ angular.module('frapontillo.gage.controllers', [])
       customSectors: angular.fromJson,
       levelColors: angular.fromJson,
       textRenderer: function (originalFunction) {
-        if (originalFunction && originalFunction($scope.value)) {
-          return originalFunction;
+        if (!originalFunction) {
+          return undefined;
         }
+        if (angular.isFunction(originalFunction)) {
+          return originalFunction();
+        }
+        return originalFunction;
       }
     };
 
@@ -82,4 +86,3 @@ angular.module('frapontillo.gage.controllers', [])
     };
 
   });
-  

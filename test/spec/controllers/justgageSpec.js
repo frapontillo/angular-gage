@@ -51,8 +51,10 @@ describe('Controller: justgageCtrl', function () {
     it('should transform the value into "test"', function () {
       scope.value = 1337;
       scope.$apply();
-      var transFn = function () {
-        return 'test';
+      var transFn = function() {
+        return function () {
+          return 'test';
+        };
       };
       var textRenderer = justgageCtrl.getOptionValue('textRenderer', transFn);
       var newValue = textRenderer();
