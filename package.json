@@ -2,6 +2,12 @@
   "name": "angular-gage",
   "version": "0.1.0",
   "dependencies": {},
+  "peerDependencies": {
+    "angular": ">=1.3.0",
+    "raphael": "^2.1.4",
+    "justgage": "^1.1.0"
+  },
+  "browser": "index.js",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
