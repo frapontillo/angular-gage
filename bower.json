@@ -41,12 +41,12 @@
     "url": "git://github.com/frapontillo/angular-gage.git"
   },
   "dependencies": {
-    "angular": ">=1.4.0",
+    "angular": "~1.4",
     "raphael": "2.1.4",
     "justgage-bower": "toorshia/justgage"
   },
   "devDependencies": {
-    "angular-mocks": ">=1.4.0",
-    "angular-scenario": ">=1.4.0"
+    "angular-mocks": "~1.4",
+    "angular-scenario": "~1.4"
   }
 }
