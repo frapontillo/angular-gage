@@ -1,6 +1,6 @@
 /**
  * angular-gage
- * @version v0.1.0 - 2015-06-13
+ * @version v0.1.0 - 2016-01-06
  * @author Francesco Pontillo (francescopontillo@gmail.com)
  * @link https://github.com/frapontillo/angular-gage
  * @license Apache-2.0
@@ -135,6 +135,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers']).
       refreshAnimationType: '@',
       donut: '@',
       donutStartAngle: '@',
+      reverse: '&',
       counter: '@',
       decimals: '@',
       symbol: '@',
