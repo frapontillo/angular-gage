@@ -51,6 +51,7 @@ all of the original JustGage parameters via AngularJS binding:
 * `refreshAnimationType` type of refresh animation (linear, >, <, <>, bounce)
 * `donut`, turn the gauge into a full circle donut
 * `donutStartAngle`, angle to start from when in donut mode
+* `reverse`, if true, max and min are swapped (with max appearing on the left, min on the right)
 * `counter`, increase numbers one by one
 * `decimals`, quantity of decimal numbers to show
 * `symbol`, unit of measure that will be appended to value
