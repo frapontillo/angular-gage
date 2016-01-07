@@ -135,7 +135,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers']).
       refreshAnimationType: '@',
       donut: '@',
       donutStartAngle: '@',
-      reverse: '@',
+      reverse: '&',
       counter: '@',
       decimals: '@',
       symbol: '@',
