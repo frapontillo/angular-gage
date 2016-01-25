@@ -16,8 +16,11 @@ all of the original JustGage parameters via AngularJS binding:
 
 * `title`, gauge title text
 * `titleFontColor`, color of the title text
+* `titleFontFamily`, font-family of the title text
+* `titlePosition`, `"above"` or `"below"` the gauge
 * `value`, value to show
 * `valueFontColor`, color of the value text
+* `valueFontFamily`, font-family of the value text
 * `width`, gauge width
 * `height`, gauge height
 * `relativeGaugeSize`, true if the gauge has to grow with the container
