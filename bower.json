@@ -43,7 +43,7 @@
   "dependencies": {
     "angular": "1.4.0",
     "raphael": "2.1.4",
-    "justgage-toorshia": "toorshia/justgage"
+    "justgage-toorshia": "mezzobit/justgage#5ba12ff"
   },
   "devDependencies": {
     "angular-mocks": "1.4.0",
