@@ -9,9 +9,12 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
         scope: {
           title: '@',                       // gauge title text
           titleFontColor: '@',              // title text color
+          titleFontFamily: '@',             // title text font-family
+          titlePosition: '@',               // title position, "above" or "below"
 
           value: '@',                       // value to show
           valueFontColor: '@',              // color of value text
+          valueFontFamily: '@',             // font-family of value text
 
           width: '@',                       // gauge width
           height: '@',                      // gauge height

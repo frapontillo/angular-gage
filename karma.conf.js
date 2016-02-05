@@ -14,7 +14,7 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/raphael/raphael.js',
-      'bower_components/justgage-bower/justgage.js',
+      'bower_components/justgage-official/justgage.js',
       'src/**/*.js',
       'test/spec/**/*.js'
     ],
