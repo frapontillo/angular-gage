@@ -19,6 +19,10 @@ module.exports = function(config) {
       'test/spec/**/*.js'
     ],
 
+    preprocessors: {
+      'test/spec/justgageSpec.js': ['webpack']
+    },
+
     // list of files / patterns to exclude
     exclude: [],
 
