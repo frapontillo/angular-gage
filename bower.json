@@ -1,6 +1,6 @@
 {
   "name": "angular-gage",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "AngularJS directive for the JustGage (http://justgage.com/) gauge.",
   "main": "./dist/angular-gage.js",
   "ignore": [
