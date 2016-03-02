@@ -5,8 +5,14 @@ AngularJS directive for the [JustGage](http://justgage.com/) gauge.
 
 ## Installation
 
+### Bower
 ```shell
 $ bower install angular-gage
+```
+
+### NPM
+```shell
+$ npm install angular-gage
 ```
 
 ## Usage
