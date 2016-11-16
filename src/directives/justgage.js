@@ -81,10 +81,10 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
               rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
               rect.right <= (window.innerWidth || document.documentElement.clientWidth)
             );
-          };
+          }
           
           // get rid of the justgage when we're done
-          scope.$on("$destroy", function handleDestroyEvent() {
+          scope.$on('$destroy', function handleDestroyEvent() {
             destroyJustgage();
           });
 
@@ -104,7 +104,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
             }));
             // will fire when the justgage element is brought back into view
             // if something slides it off the screen or sets ng-show/hide this will ensure the justgage is redrawn and animated properly
-            watchers.push(scope.$watch(function () { return isElementInViewPort(element[0]) }, function (newValue) {
+            watchers.push(scope.$watch(function () { return isElementInViewPort(element[0]); }, function (newValue) {
               if (newValue) {
                 rebuildJustgage();
               }
