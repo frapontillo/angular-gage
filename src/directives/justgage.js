@@ -132,8 +132,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
           // used outside of init() now, since we have to do this when the gage is brought back into view
           var destroyJustgage = function() {
             if (justgage) {
-                var canvasDom = justgage.canvas.canvas;
-                canvasDom.parentNode.removeChild(canvasDom);
+                justgage.canvas.canvas.parentNode.removeChild(canvasDom);
                 justgage = null;
             }
           };
