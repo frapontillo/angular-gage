@@ -64,7 +64,8 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
           humanFriendly: '@',               // true to show shorthand big numbers (300K instead of 300XXX)
           humanFriendlyDecimal: '@',        // number of decimal places for our human friendly number to contain
 
-          textRenderer: '&'                 // function applied before rendering text
+          textRenderer: '&',                 // function applied before rendering text
+          watchViewPort: '@'                 // Watch for the element going out of the viewport/being hidden - redraw to prevent UI issues
         },
         controller: 'justgageCtrl',
         link: function (scope, element, attrs, justgageCtrl) {
@@ -102,14 +103,17 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
                 justgage.refresh(scope.value, newValue);
               }
             }));
-            // will fire when the justgage element is brought back into view
+            
+            // will fire only if the attribute 'watch-view-port' is set to true
+            // if fired, justgage element is brought back into view
             // if something slides it off the screen or sets ng-show/hide this will ensure the justgage is redrawn and animated properly
-            watchers.push(scope.$watch(function () { return isElementInViewPort(element[0]); }, function (newValue) {
-              if (newValue) {
-                rebuildJustgage();
-              }
-            }));
-
+            if (justgageCtrl.getOptionValue('watchViewPort', scope.watchViewPort) === true) {
+              watchers.push(scope.$watch(function () { return isElementInViewPort(element[0]); }, function (newValue) {
+                if (newValue) {
+                  rebuildJustgage();
+                }
+              }));
+            }
           };
 
           /**
