@@ -73,8 +73,8 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
               watchers = [];
 
           // used to determine whether the justgage element is in the viewport or not.
-          function isElementInViewPort(el) {
-            var rect = el.getBoundingClientRect();
+          function isElementInViewPort() {
+            var rect = element[0].getBoundingClientRect();
             
             return (
               rect.top >= 0 &&
@@ -85,9 +85,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
           }
           
           // get rid of the justgage when we're done
-          scope.$on('$destroy', function handleDestroyEvent() {
-            destroyJustgage();
-          });
+          scope.$on('$destroy', destroyJustgage);
 
           /**
            * Bind the `value` property on the scope in order to refresh the JustGage when it changes.
@@ -108,7 +106,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
             // if fired, justgage element is brought back into view
             // if something slides it off the screen or sets ng-show/hide this will ensure the justgage is redrawn and animated properly
             if (justgageCtrl.getOptionValue('watchViewPort', scope.watchViewPort) === true) {
-              watchers.push(scope.$watch(function () { return isElementInViewPort(element[0]); }, function (newValue) {
+              watchers.push(scope.$watch(isElementInViewPort, function (newValue) {
                 if (newValue) {
                   rebuildJustgage();
                 }
@@ -141,6 +139,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
               justgage = null;
             }
           };
+          
           var rebuildJustgage = function() {
             destroyJustgage();
             var justgageOptions = { parentNode: element[0] };
