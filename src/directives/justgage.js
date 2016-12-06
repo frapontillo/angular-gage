@@ -64,12 +64,45 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
           humanFriendly: '@',               // true to show shorthand big numbers (300K instead of 300XXX)
           humanFriendlyDecimal: '@',        // number of decimal places for our human friendly number to contain
 
-          textRenderer: '&'                 // function applied before rendering text
+          textRenderer: '&',                 // function applied before rendering text
+          watchViewPort: '@'                 // Watch for the element going out of the viewport/being hidden - redraw to prevent UI issues
         },
         controller: 'justgageCtrl',
         link: function (scope, element, attrs, justgageCtrl) {
           var justgage,
               watchers = [];
+
+          // used to determine whether the justgage element is in the viewport or not.
+          function isElementInViewPort() {
+            var rect = element[0].getBoundingClientRect();
+            
+            return (
+              rect.top >= 0 &&
+              rect.left >= 0 &&
+              rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+              rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+          }
+
+          // helper functions to destroy/rebuild justgage
+          // used outside of init() now, since we have to do this when the gage is brought back into view
+          var destroyJustgage = function() {
+            if (justgage) {
+              var canvasDom = justgage.canvas.canvas;
+              canvasDom.parentNode.removeChild(canvasDom);
+              justgage = null;
+            }
+          };
+          
+          var rebuildJustgage = function() {
+            destroyJustgage();
+            var justgageOptions = { parentNode: element[0] };
+            angular.extend(justgageOptions, justgageCtrl.getDefinedOptions());
+            justgage = new JustGage(justgageOptions);
+          };
+ 
+          // get rid of the justgage when we're done
+          scope.$on('$destroy', destroyJustgage);
 
           /**
            * Bind the `value` property on the scope in order to refresh the JustGage when it changes.
@@ -85,6 +118,17 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
                 justgage.refresh(scope.value, newValue);
               }
             }));
+            
+            // will fire only if the attribute 'watch-view-port' is set to true
+            // if fired, justgage element is brought back into view
+            // if something slides it off the screen or sets ng-show/hide this will ensure the justgage is redrawn and animated properly
+            if (justgageCtrl.getOptionValue('watchViewPort', scope.watchViewPort) === true) {
+              watchers.push(scope.$watch(isElementInViewPort, function (newValue) {
+                if (newValue) {
+                  rebuildJustgage();
+                }
+              }));
+            }
           };
 
           /**
@@ -102,31 +146,20 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
               }));
             });
           };
-
+         
           /**
            * Initialize the JustGage element with the given non-undefined options on the scope.
            * It also binds the scope values to appropriate changes
            */
           var init = function() {
-            var justgageOptions = {
-              parentNode: element[0]
-            };
-            angular.extend(justgageOptions, justgageCtrl.getDefinedOptions());
-
-            // Remove existing canvas from DOM (if any)
-            if (justgage) {
-              var canvasDom = justgage.canvas.canvas;
-              canvasDom.parentNode.removeChild(canvasDom);
-            }
-
             // Clear existing watcher (see http://stackoverflow.com/a/17306971 why while & pop)
             while (watchers.length > 0) {
               var watcher = watchers.pop();
               watcher();
             }
-
-            // rebuild the gage
-            justgage = new JustGage(justgageOptions);
+            
+            // will destroy if exists and build it.
+            rebuildJustgage();
 
             // Bind scope changes to element methods
             bindValue();
