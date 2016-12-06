@@ -83,7 +83,24 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
               rect.right <= (window.innerWidth || document.documentElement.clientWidth)
             );
           }
+
+          // helper functions to destroy/rebuild justgage
+          // used outside of init() now, since we have to do this when the gage is brought back into view
+          var destroyJustgage = function() {
+            if (justgage) {
+              var canvasDom = justgage.canvas.canvas;
+              canvasDom.parentNode.removeChild(canvasDom);
+              justgage = null;
+            }
+          };
           
+          var rebuildJustgage = function() {
+            destroyJustgage();
+            var justgageOptions = { parentNode: element[0] };
+            angular.extend(justgageOptions, justgageCtrl.getDefinedOptions());
+            justgage = new JustGage(justgageOptions);
+          };
+ 
           // get rid of the justgage when we're done
           scope.$on('$destroy', destroyJustgage);
 
@@ -129,24 +146,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
               }));
             });
           };
-          
-          // helper functions to destroy/rebuild justgage
-          // used outside of init() now, since we have to do this when the gage is brought back into view
-          var destroyJustgage = function() {
-            if (justgage) {
-              var canvasDom = justgage.canvas.canvas;
-              canvasDom.parentNode.removeChild(canvasDom);
-              justgage = null;
-            }
-          };
-          
-          var rebuildJustgage = function() {
-            destroyJustgage();
-            var justgageOptions = { parentNode: element[0] };
-            angular.extend(justgageOptions, justgageCtrl.getDefinedOptions());
-            justgage = new JustGage(justgageOptions);
-          };
-
+         
           /**
            * Initialize the JustGage element with the given non-undefined options on the scope.
            * It also binds the scope values to appropriate changes
